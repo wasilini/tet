@@ -43,20 +43,6 @@ if(trim(!empty($_POST['message']))){
 	$body.='<p><strong>Сообщение:</strong> '.$_POST['message'].'</p>';
 }
 
-//Прикрепить файл
-if (!empty($_FILES['image']['tmp_name'])) {
-	//путь загрузки файла
-	$filePath = __DIR__ . "/files/" . $_FILES['image']['name'];
-	//грузим файл
-	if (copy($_FILES['image']['tmp_name'], $filePath)){
-		$fileAttach = $filePath;
-		$body.='<p><strong>Фото в приложении</strong>';
-		$mail->addAttachment($fileAttach);
-	}
-}
-
-$mail->Body = $body;
-
 //Отправляем
 if (!$mail->send()) {
 	$message = 'Ошибка';
